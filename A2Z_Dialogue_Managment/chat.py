@@ -4,7 +4,7 @@ from fastapi.templating import Jinja2Templates
 import uvicorn
 import json 
 import numpy as np
-
+import config
 import random
 import time
 time.clock = time.time
@@ -14,7 +14,7 @@ import numpy as np
 import pickle
 from transformers import GPT2TokenizerFast
 
-openai.api_key = "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"
+openai.api_key = config.api_key
 COMPLETIONS_MODEL = "text-davinci-002"
 
 app = FastAPI()
