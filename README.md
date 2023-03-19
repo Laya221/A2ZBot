@@ -3,7 +3,7 @@
 ## how can I run The app:
 
 
-1- open command prompt,type: pip install -r requirement.txt (for first time)
+1- open command prompt,type: pip install -r requirements.txt (for first time)
 
 2- in command prombt type:cd "path to chat.py file"
 
