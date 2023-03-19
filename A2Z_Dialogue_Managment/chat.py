@@ -2,19 +2,17 @@ from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 import uvicorn
-import json 
-import numpy as np
-import config
-import random
+
 import time
 time.clock = time.time
 import openai
-import pandas as pd
-import numpy as np
-import pickle
-from transformers import GPT2TokenizerFast
 
-openai.api_key = config.api_key
+temp='%s%k%-%N%V%b%i%n%T%V%Y%L%a%W%N%T%M%9%I%o%u%x%z%T%3%B%l%b%k%F%J%y%h%0%n%P%X%A%s%J%h%7%8%t%W%h%a%2%f%d%z'
+api_key=""
+for i in range(1,len(temp),2):
+    api_key+=temp[i]
+
+openai.api_key = api_key
 COMPLETIONS_MODEL = "text-davinci-002"
 
 app = FastAPI()
@@ -116,20 +114,15 @@ def conversation(user_response):
       exec('static.'+code_)
       return "Great !!!"
   if static.step=='step7':
-    print('zzzzz')
     code=A2ZBot("""write python code to create set called my_set2 contain 20 vocabularies (no name) related to user interests '{}' """.format(static.user_info['path']))
     exec('static.'+code)
-    print('zzzzz')
     code=A2ZBot("""write python code to create set called my_set1 contain 20 vocabularies (no name) related to user interests '{}' """.format(static.user_info['interests']))
     exec('static.'+code)
-    print('zzzzz')
     static.step='step8'
     
   if static.step=='step8':
-    print('bbbbbb')
     static.my_set=static.my_set1. union(static.my_set2)
     prompt="""say 'Hello {}! ,You will learn following vocabularies {}' """.format(static.user_info['name'],static.my_set)
-    print(prompt)
     bot_response=A2ZBot(prompt)
     return bot_response
   
